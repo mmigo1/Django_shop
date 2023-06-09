@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ one_furniture.name }}
+{% endblock %}
+{% block content %}
+    <ul class="list-group">
+        <li class="list-group-item">Название: {{ one_furniture.name }}</li>
+        <li class="list-group-item">Описание: {{ one_furniture.description }}</li>
+        <li class="list-group-item">Цена: {{ one_furniture.price }}</li>
+        <li class="list-group-item">Дата завоза: {{ one_furniture.date_create }}</li>
+        {% if one_furniture.exist %}
+            <li class="list-group-item">Есть в наличии</li>
+        {% else %}
+            <li class="list-group-item">Нет в наличии</li>
+        {% endif %}
+    </ul>
+    {% if perms.furniture.change_furniture %}
+        <a href="{% url 'furn_edit' object.pk %}" class="btn btn-warning">Редактировать</a><br>
+    {% endif %}
+    {% if perms.furniture.delete_furniture %}
+        <form method="post" action="{% url 'furn_del' object.pk %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Удалить">
+        </form>
+    {% endif %}
+    <div class="container">
+        <form method="post" action="{% url 'add_basket_prod' one_furniture.pk %}">
+            {% csrf_token %}
+            {{ basket_form }}
+            <input type="submit" class="btn btn-success" value="Добавить в корзину">
+        </form>
+    </div>
+    <a href="{% url 'furn_list' %}" class="btn btn-info">Назад</a>
+{% endblock %}
+

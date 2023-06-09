@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Магазин Мебели
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div><h1 class="text-center">Приветствуем вас в магазине мебели</h1></div>
+    <div>
+        <table class="table">
+            <h4>Для регистрации нажмите здесь -
+                <a href='{% url 'regis' %}'>Регистрация</a>
+            </h4>
+            <h4>Для перехода в каталог мебели нажмите здесь -
+                <a href='{% url 'furn_list' %}'>Каталог</a>
+            </h4>
+            <h4>Для написания письма нажмите здесь -
+                <a href='{% url 'contact_email' %}'>Письмо</a>
+            </h4>
+        </table>
+    </div>
+{% endblock %}

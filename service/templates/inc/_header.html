@@ -1,0 +1,52 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Домашняя страница</a></li>
+
+
+                <li><a href="{% url 'furn_list' %}" class="nav-link px-2 text-white">Каталог</a></li>
+
+                <li><a href="{% url 'contact_email' %}" class="nav-link px-2 text-white">Обратная связь</a></li>
+                {% if not request.user.is_anonymous %}
+                <li><a href="{% url 'list_basket_prod' %}" class="nav-link px-2 text-white">Корзина</a></li>
+                {% endif %}
+            </ul>
+            <div class="text-end">
+                {% if request.user.is_anonymous %}
+                    <a href="{% url 'log in' %} " class="btn btn-outline-light me-2">Войти в аккаунт</a>
+                    <a href="{% url 'regis' %}" class="btn btn-warning">Регистрация</a>
+                {% else %}
+                    <a href="{% url 'log out' %}" class="btn btn-danger">Выход из аккаунта</a>
+                    <a href="{% url 'list_basket_prod' %}" class="btn btn-warning">Корзина</a>
+                {% endif %}
+                {% if perms.Admin_group %}
+                    <a href="{% url 'furn_api_list' %}" class="btn btn-danger">API - лист</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+
+{#<header class="d-flex justify-content-center py-3">#}
+{#    <ul class="nav nav-pills">#}
+{#        <li class="nav-item"><a href="{% url 'index_Fruit' %}" class="nav-link active" aria-current="page">Домашняя страница</a></li>#}
+{#        <li class="nav-item"><a href="{% url 'list_fruit' %}" class="nav-link">Список фруктов</a></li>#}
+{#        <li class="nav-item"><a href="{% url 'add_fruit' %}" class="nav-link">Добавить фрукт</a></li>#}
+{#         <li class="nav-item"><a href="{% url 'list_supp' %}" class="nav-link">Поставщики</a></li>#}
+{#         <li class="nav-item"><a href="{% url 'contact_email' %}" class="nav-link">Отправить письмо</a></li>#}
+{#        {%  if request.user.is_anonymous %}#}
+{#         <li class="nav-item"><a href="{% url 'log in' %}" class="nav-link">Авторизация</a></li>#}
+{#         <li class="nav-item"><a href="{% url 'regis' %}" class="nav-link">Регистрация</a></li>#}
+{#        {% else %}#}
+{#         <li class="nav-item"><a href="{% url 'list_basket_prod' %}" class="nav-link">Корзина</a></li>#}
+{#         <li class="nav-item"><a href="{% url 'log out' %}" class="nav-link">Выход из аккаунта</a></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</header>#}
